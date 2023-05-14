@@ -1,0 +1,68 @@
+<div class="d-flex flex-column flex-md-row align-items-center bg-primary justify-content-between p-3 px-md-4 mb-3
+ border-bottom shadow-lg fixed-top">
+<a routerLink="/">
+  <img src="../../../assets/logo.png" style="max-height: 80px;" alt="logo" class="me-2" role="img" >
+
+</a>
+  <nav class="my-2 my-md-0 me-md-3 text-uppercase" style="font-size: larger;">
+    <a class="p-2" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+    <a class="p-2" routerLink="/shop" routerLinkActive="active">Shop</a>
+    <a class="p-2" routerLink="/test-error" routerLinkActive="active">Errors</a>
+  </nav>
+    <img src="../../../assets/menu.png" style="max-height: 60px;" alt="logo" class="me-2" role="img" >
+    <form class="d-flex" role="search">
+    <input class="form-control me-2" style="width: 400px" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success bg-white" type="submit">Search</button>
+  </form>
+<div class="d-flex align-items-center ">
+  <a routerLink="/basket" class="position-relative">
+    <i class="fa fa-shopping-cart fa-2x me-5 text-dark"></i>
+    <div *ngIf="(basketService.basket$ | async) as basket" class="cart-no">
+      {{getCount(basket.items)}}
+    </div>
+  </a>
+  <a>
+    <img src="../../../assets/tikets.png" style="max-height: 70px;" alt="logo" class="me-2" role="img" >
+  </a>
+  <a>
+    <img src="../../../assets/masages.png" style="max-height: 60px;" alt="logo" class="me-2" role="img" >
+  </a>
+  <a>
+    <img src="../../../assets/user.png" style="max-height: 50px;" alt="logo" class="me-2" role="img" >
+  </a>
+  <ng-container *ngIf="(accountService.currentUser$ | async) === null">
+    <a routerLink="/account/login" class="btn btn-outline-primary bg-white mr-2"> Login </a>
+    <a routerLink="/account/register" class="btn btn-outline-primary bg-white mr-3"> Sign up </a>
+  </ng-container>
+  <ng-container *ngIf="(accountService.currentUser$ | async)">
+    <div class="dropdown ml-3 mr-5" dropdown>
+      <a class="dropdown-toggle" style="cursor: pointer" dropdownToggle>
+        <strong>
+          Welkome {{(accountService.currentUser$ | async).displayName}}
+        </strong>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" style="cursor: pointer" *dropdownMenu>
+        <a routerLink="/basket" class="dropdown-item d-flex align-items-center py-2">
+          <i class="fa fa-shoping-cart mr-3"></i>View Basket
+        </a>
+        <a routerLink="/orders" class="dropdown-item d-flex align-items-center py-2">
+          <i class="fa fa-history mr-3"></i>View Orders
+        </a>
+        <a routerLink="/admin/list" class="dropdown-item d-flex align-items-center py-2">
+            <i class="fa fa-shoping-cart mr-3"></i>List Products
+        </a>
+        <a routerLink="/admin/account" class="dropdown-item d-flex align-items-center py-2">
+            <i class="fa fa-history mr-3"></i>Edit Users
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item d-flex align-items-center py-2">
+          <i class="fa faSignOut mr-3"></i>Logout
+        </a>
+      </div>
+    </div>
+
+
+  </ng-container>
+
+</div>
+</div>
